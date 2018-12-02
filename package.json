@@ -1,0 +1,19 @@
+{
+  "name": "helpinghandapp",
+  "version": "1.0.0",
+  "description": "An app to connect the people in need with people who wants to help",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farstarz/HelpingHandApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farstarz/HelpingHandApp/issues"
+  },
+  "homepage": "https://github.com/farstarz/HelpingHandApp#readme"
+}
