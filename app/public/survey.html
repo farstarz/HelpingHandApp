@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Survey Page</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-center">
+        <span class="fa fa-fire"></span> Milegi Milega</h1>
+      <hr>
+      <h2 class="text-center">Provide us with some details</h2>
+      <br>
+      <div class="text-center">
+        <a href="/friends">
+          <button class="btn btn-lg btn-primary">
+            <span class="fa fa-list-alt"></span> Find Matchs</button>
+        </a>
+        <a href="/">
+          <button class="btn btn-lg btn-default">
+            <span class="fa fa-home"></span>
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Reservation Page -->
+        <div class="card">
+          <div class="card-header">
+            Survey Questions
+          </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="reserve-name">Name</label>
+                <input type="text" class="form-control" id="reserve-name">
+              </div>
+              <div class="form-group">
+                <label for="reserve-phone">Photos</label>
+                <input type="text" class="form-control" id="reserve-photo">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question1">Question 1</label>
+                <input type="text" class="form-control" id="reserve-question1">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question2">Question 2</label>
+                <input type="text" class="form-control" id="reserve-question2">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question3">Question 3</label>
+                <input type="text" class="form-control" id="reserve-question3">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question4">Question 4</label>
+                <input type="text" class="form-control" id="reserve-question4">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question5">Question 5</label>
+                <input type="text" class="form-control" id="reserve-question5">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question6">Question 6</label>
+                <input type="text" class="form-control" id="reserve-question6">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question7">Question 7</label>
+                <input type="text" class="form-control" id="reserve-question7">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question8">Question 8</label>
+                <input type="text" class="form-control" id="reserve-question8">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question9">Question 9</label>
+                <input type="text" class="form-control" id="reserve-question9">
+              </div>
+              <div class="form-group">
+                <label for="reserve-question10">Question 10</label>
+                <input type="text" class="form-control" id="reserve-question10">
+              </div>
+              <button type="submit" class="btn btn-primary submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
+
+<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+<script type="text/javascript">
+  // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
+  // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+  // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+  // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+
+  $(".submit").on("click", function(event) {
+    event.preventDefault();
+
+    // Here we grab the form elements
+    var newProfile = {
+      Name: $("#reserve-name").val().trim(),
+      photo: $("#reserve-photo").val().trim(),
+      Score: [
+        $("#reserve-question1").val().trim(),
+        $("#reserve-question2").val().trim(),
+        $("#reserve-question3").val().trim(),
+        $("#reserve-question4").val().trim(),
+        $("#reserve-question5").val().trim(),
+        $("#reserve-question6").val().trim(),
+        $("#reserve-question7").val().trim(),
+        $("#reserve-question8").val().trim(),
+        $("#reserve-question9").val().trim(),
+        $("#reserve-question10").val().trim()]
+      
+    };
+
+    console.log(newProfile);
+
+    // This line is the magic. It"s very similar to the standard ajax function we used.
+    // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+    // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+    // depending on if a tables is available or not.
+
+    $.post("/api/friends", newProfile,
+      function(data) {
+
+        // If a table is available... tell user they are booked.
+        if (data) {
+          alert("Yay! You are officially registered!");
+        }
+
+        // If a table is available... tell user they on the waiting list.
+        else {
+          alert("Sorry you are on the wait list");
+        }
+
+        // Clear the form when submitting
+        $("#reserve-name").val("");
+        $("#reserve-phone").val("");
+        $("#reserve-question1").val("");
+        $("#reserve-question2").val("");
+        $("#reserve-question3").val("");
+        $("#reserve-question4").val("");
+        $("#reserve-question5").val("");
+        $("#reserve-question6").val("");
+        $("#reserve-question7").val("");
+        $("#reserve-question8").val("");
+        $("#reserve-question9").val("");
+        $("#reserve-question10").val("");
+        
+      });
+
+  });
+
+</script>
