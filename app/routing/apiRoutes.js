@@ -19,6 +19,7 @@ module.exports = function(app){
     // api reqests routing
     app.get('/api/friends',(req,res)=>{
         res.JSON.parse(friends);
+        console.log(JSON.parse(friends));
     });
     app.post('/api/friends',(req,res)=>{
         let newFriend = req.body;
