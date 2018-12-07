@@ -2,6 +2,7 @@
 const path = require('path');
 let friends = require('../data/friends');
 module.exports = function(app){
+    console.log('reading apiRoutes');
   // api reqests routing
   app.get('/api/friends',(req,res)=>{
     res.JSON.parse(friends);
