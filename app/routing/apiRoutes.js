@@ -6,7 +6,6 @@ module.exports = function(app){
   // api reqests routing
   app.get('/api/friends',(req,res)=>{
     res.JSON.parse(friends);
-    console.log(JSON.parse(friends));
   });
   app.post('/api/friends',(req,res)=>{
     let newFriend = req.body;
@@ -15,19 +14,22 @@ module.exports = function(app){
         let compatability = [];
         friends.forEach((friend)=>{
             let diff = 0;
+            console.log(friend.name);
             for(let i=0;i<friend.scores.length;i++){
-                diff += Math.abs(friend.scores[i],newfriend.scores[i]);
+              diff += Math.abs(friend.scores[i]-newfriend.scores[i]);
+              // console.log(friend.scores[i],newfriend.scores[i],diff);
             }
             compatability.push(diff);
         });
         // return the index for the friend with least compatability difference
-        return compatability.indexOf(Math.min(compatability));
+        console.log(Math.min(...compatability));
+        return compatability.indexOf(Math.min(...compatability));
     
     }
-    console.log(newFriend);
-    // comapare friends to find the closest match
-    res.JSON(friends[compare(newFriend)]);
     
+    // comapare friends to find the closest match
+    console.log(friends[compare(newFriend)]);
+    res.json([friends[compare(newFriend)]]);
     // add new friend to table
     friends.push(newFriend);
 
