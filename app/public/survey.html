@@ -11,6 +11,65 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+  <!-- adding firebase config -->
+  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyC0pCeC0QMuHBeHbT0EyK-2fyO-X-3Orpw",
+      authDomain: "milegimilaga.firebaseapp.com",
+      databaseURL: "https://milegimilaga.firebaseio.com",
+      projectId: "milegimilaga",
+      storageBucket: "milegimilaga.appspot.com",
+      messagingSenderId: "666797401921"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <!-- verifying firebase user sign-in status -->
+  <script type="text/javascript">
+    initApp = function() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var uid = user.uid;
+          var phoneNumber = user.phoneNumber;
+          var providerData = user.providerData;
+          user.getIdToken().then(function(accessToken) {
+            document.getElementById('sign-in-status').textContent = 'Signed in';
+            document.getElementById('sign-in').textContent = 'Sign out';
+            document.getElementById('sign-in').addEventListener('click', function() {
+              firebase.auth().signOut();
+            });
+            document.getElementById('account-details').textContent = JSON.stringify({
+              displayName: displayName,
+              email: email,
+              emailVerified: emailVerified,
+              phoneNumber: phoneNumber,
+              photoURL: photoURL,
+              uid: uid,
+              accessToken: accessToken,
+              providerData: providerData
+            }, null, '  ');
+          });
+        } else {
+          // User is signed out.
+          document.getElementById('sign-in-status').textContent = 'Signed out';
+          document.getElementById('sign-in').textContent = 'Sign in';
+          document.getElementById('account-details').textContent = 'null';
+        }
+      }, function(error) {
+        console.log(error);
+      });
+    };
+
+    window.addEventListener('load', function() {
+      initApp()
+    });
+  </script>
 </head>
 
 <body>
@@ -21,6 +80,9 @@
       <h1 class="text-center">
         <span class="fa fa-heart"></span> Milegi Milega</h1>
       <hr>
+      <div id="sign-in-status"></div>
+      <div id="sign-in"></div>
+      <pre id="account-details"></pre>
       <h2 class="text-center">Provide us with some details</h2>
       <br>
       <div class="text-center">
