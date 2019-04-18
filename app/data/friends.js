@@ -2,8 +2,8 @@
 
 let friends = [
     {
-        "name":"Ronny",
-        "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        "name":"Sakura",
+        "photo":"https://vignette.wikia.nocookie.net/naruto/images/6/64/Sakura_Part_1.png/revision/latest?cb=20170726101444",
         "scores":[
             5,
             1,
@@ -18,8 +18,8 @@ let friends = [
           ]
       },
       {
-        "name":"Kabbo",
-        "photo":"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+        "name":"Naruto",
+        "photo":"https://vignette.wikia.nocookie.net/naruto/images/0/09/Naruto_newshot.png/revision/latest?cb=20170621101134",
         "scores":[
             6,
             3,

@@ -153,8 +153,9 @@
         if (data) {
           alert("Yay! You have a match!");
           // console.log(data);
-          console.log("------------------------------------");
-  
+          console.log(data);
+          $(".card").html("");
+
           // Get a reference to the tableList element and populate it with tables
           var tableList = $("#tableList");
   
@@ -162,10 +163,12 @@
           var listItem = $("<li class='list-group-item mt-4'>");
   
           listItem.append(
-            $("<h2>").text("Table #" + (i + 1)),
+            $("<h2>").text("You matched with"),
             $("<hr>"),
-            $("<h2>").text("Name: " + data[i].name),
-            $("<h2>").text("Photo: " + data[i].photo),
+            $("<h2>").text("Name: " + data[0].name),
+            $("<img>").attr({src: data[0].photo,
+                             width: 200,
+                             height: 200})
           );
   
           tableList.append(listItem);
